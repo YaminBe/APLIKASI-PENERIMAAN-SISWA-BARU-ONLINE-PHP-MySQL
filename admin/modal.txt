@@ -1,0 +1,55 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#edit<?php echo $data['kode_siswa']; ?>"> <span class="glyphicon glyphicon-edit"></span>Edit
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="edit<?php echo $data['kode_siswa']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="edit<?php echo $data['kode_siswa']; ?>">Modal title</h4>
+      </div>
+<form action="" method="post">
+<div class="modal-body">      	
+<div class="form-group">
+<label>Kode</label>
+<input name="kode_siswa" type="text" class="form-control" value="<?php echo $data['kode_siswa']; ?> ">
+</div>
+
+<div class="form-group">
+<label>Username</label>
+<input name="username" type="text" class="form-control" value="<?php echo $data['username']; ?> ">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input name="pass" type="text" class="form-control" value="<?php echo $data['pass']; ?> ">
+</div>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<input name="update" type="submit" class="btn btn-primary" value="Edit">
+</div>
+</form>
+<?php 
+include 'inc/koneksi.php';
+// Script update data
+if (isset($_REQUEST['update'])) {
+$username = $_REQUEST['username']; 
+$pass = $_REQUEST['pass'];
+mysql_query("update tb_siswa set username='$username',pass='$pass',password =md5('$pass') where kode_siswa='$kode_siswa' ") or die(mysql_error());
+?>
+<script type="text/javascript">
+swal(" Sukses !", "Data berhasil Di Ubah!", "success")
+window.location.href="?page=admin&action=edituser";     
+</script>
+<?php 
+}
+ ?>
+   
+    </div>
+  </div>
+</div>
+
